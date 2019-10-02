@@ -11,6 +11,10 @@ import time
 switch_type = 'S'
 # Target version you want to upgrade to
 target_version = '08091'
+# TFTP Server IP address
+tftp_server = '10.9.21.24'
+# TFTP Server Directory
+tftp_directory = 'software/ruckus/'
 
 # Define the function to be called in main
 def upgrade_switch(switch, switch_username, switch_password, target_version):
@@ -72,7 +76,7 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
                 sys.exit('{}: Chassis version bootrom file missing or not defined!'.format(switch))
             # Download 8090C BootRom
             print('{}: Downloading 8090c bootrom'.format(switch))
-            bootrom_download_command = 'copy tftp flash 10.9.21.24 software/ruckus/08090c/ICX{}/Boot/{} bootrom'.format(chassis_type, bootrom_file)
+            bootrom_download_command = 'copy tftp flash {} {}08090c/ICX{}/Boot/{} bootrom'.format(tftp_server, tftp_directory, chassis_type, bootrom_file)
             bootrom_output = net_connect.send_command(bootrom_download_command)
             if 'Load to buffer' in bootrom_output:
                 print('Bootrom transfer started')
@@ -83,7 +87,7 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
             time.sleep(25)
             # Download 8090C Imnage
             print('{}: Downloading 8090c image'.format(switch))
-            image_download_command = 'copy tftp flash 10.9.21.24 software/ruckus/08090c/ICX{}/Images/SP{}08090c.bin primary'.format(chassis_type, switch_type)
+            image_download_command = 'copy tftp flash {} {}08090c/ICX{}/Images/SP{}08090c.bin primary'.format(tftp_server, tftp_directory, chassis_type, switch_type)
             image_output = net_connect.send_command(image_download_command)
             if 'Load to buffer' in image_output:
                 print('{}: Image transfer started'.format(switch))
@@ -144,8 +148,8 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
             print('{}: Attempting to upgrade switch to {}'.format(switch, target_version))
             # Download Target Version Image
             print('{}: Downloading {} image'.format(switch, target_version))
-            image_download_command = 'copy tftp flash 10.9.21.24 software/ruckus/{}/ICX{}/Images/SP{}{}ufi.bin primary'.format(target_version, chassis_type, switch_type, target_version)
-            print('{}: Downloading software/ruckus/{}/ICX{}/Images/SP{}{}ufi.bin'.format(switch, target_version, chassis_type, switch_type, target_version))
+            image_download_command = 'copy tftp flash {} {}{}/ICX{}/Images/SP{}{}ufi.bin primary'.format(tftp_server, tftp_directory, target_version, chassis_type, switch_type, target_version)
+            print('{}: Downloading {}{}/ICX{}/Images/SP{}{}ufi.bin'.format(switch, tftp_directory, target_version, chassis_type, switch_type, target_version))
             image_output = net_connect.send_command(image_download_command)
             if 'Load to buffer' in image_output:
                 print('{}: Image transfer started'.format(switch))
