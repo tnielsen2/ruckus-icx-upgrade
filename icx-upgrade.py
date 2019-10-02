@@ -7,7 +7,7 @@ import sys
 import time
 
 ### Static variables
-# S = Switch, if upgrading a router, us the "R" string
+# What codebase you are upgrading. S for layer 2 switch, R for layer 3 switch.
 switch_type = 'S'
 # Target version you want to upgrade to
 target_version = '08091'

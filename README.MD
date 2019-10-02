@@ -1,6 +1,7 @@
 ### ICX-Upgrade
 
 This will upgrade your ICX switch to 8091c, and perform the necessary steps to upgrade to the intermediate version if required. 
+In order for this to work, you must have a TFTP server, with the necessary code placed on it for retrieval. 
 
 Set your static variables at the top of the script. 
 
