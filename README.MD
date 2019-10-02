@@ -15,12 +15,16 @@ tftp_server = '10.9.21.24'
 # TFTP Server Directory
 tftp_directory = 'software/ruckus/'
 ```
-Set your environment variables for username, password, and the list of switches to upgrade. Alternatively, you can define the variables at runtime instead of exporting them. 
+Set your environment variables for username, password, and the list of switches to upgrade. Alternatively, you can define the variables at runtime instead of exporting them.
+INPUT is a multi line string that is converted into a list in the python script. 
+I run this script in Jenkins with a multi-line string parameter called "INPUT". Jenkins doesn't have a way to natively pass a bash array, so this was the best way to incorporate it into Jenkins.
 
 ```bash
 SWITCH_USERNAME. Define it this way: export SWITCH_USERNAME='admin'
 SWITCH_PASSWORD. Define it this way: export SWITCH_PASSWORD='abc1234'
-SWITCHES.        Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]'
+INPUT.        Define it this way: export INPUT="1.2.3.4
+                                                1.2.3.5
+                                                1.2.3.6"
 ```
 
 Execute your script:
