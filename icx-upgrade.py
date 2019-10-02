@@ -206,10 +206,13 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
 ### Environment variables assigned to python variables
 # Validate environment variables are pulled.
 try:
-    switch_list = json.loads(os.environ['SWITCHES'])
+    switch_parameter = os.getenv('INPUT')
+    switch_list = switch_parameter.splitlines()
 except:
     sys.exit(
-        ''' ERROR: Environment variable list SWTICHES not defined. Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]' ''')
+        ''' ERROR: Environment variable list SWTICHES not defined. Define it this way: export INPUT="1.2.3.4 ''')
+    print('''1.2.3.5 ''')
+    print('''1.2.3.6" ''')
 # Get username and password variables
 try:
     switch_username = os.getenv('SWITCH_USERNAME')
@@ -238,5 +241,7 @@ else:
     print('Missing one of the three following environment variables:')
     print('''SWITCH_USERNAME. Define it this way: export SWITCH_USERNAME='admin' ''')
     print('''SWITCH_PASSWORD. Define it this way: export SWITCH_PASSWORD='abc1234' ''')
-    print('''SWITCHES.        Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]' ''')
+    print('''INPUT.        Define it this way: export INPUT="1.2.3.4 ''')
+    print('''1.2.3.5 ''')
+    print('''1.2.3.6" ''')
     sys.exit('Exiting Script')
