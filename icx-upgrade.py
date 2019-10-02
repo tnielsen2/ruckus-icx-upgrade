@@ -209,7 +209,7 @@ try:
     switch_list = json.loads(os.getenv['SWITCHES'])
 except:
     sys.exit(
-        ''' ERROR: Environment variable list SWTICHES not defined. Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]' ''')
+        ''' ERROR: Environment variable list SWITCHES not defined. Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]' ''')
 # Get username and password variables
 try:
     switch_username = os.getenv('SWITCH_USERNAME')
