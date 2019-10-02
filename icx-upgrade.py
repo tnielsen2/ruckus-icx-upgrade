@@ -238,5 +238,5 @@ else:
     print('Missing one of the three following environment variables:')
     print('''SWITCH_USERNAME. Define it this way: export SWITCH_USERNAME='admin' ''')
     print('''SWITCH_PASSWORD. Define it this way: export SWITCH_PASSWORD='abc1234' ''')
-    print('''SWITCHES.        Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"] ''')
+    print('''SWITCHES.        Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"]' ''')
     sys.exit('Exiting Script')
