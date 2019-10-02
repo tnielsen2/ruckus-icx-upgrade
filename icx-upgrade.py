@@ -208,19 +208,19 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
 try:
     switch_list = json.loads(os.environ['SWITCHES'])
 except:
-    print(
-        ''' Environment variable list SWTICHES not defined. Define it this way: export SWITCHES='["10.8.20.28", "10.8.20.29"]' ''')
+    sys.exit(
+        ''' ERROR: Environment variable list SWTICHES not defined. Define it this way: export SWITCHES='["10.8.20.28", "10.8.20.29"]' ''')
 # Get username and password variables
 try:
     switch_username = os.getenv('SWITCH_USERNAME')
 except:
-    print(
-        ''' Environment variable SWITCH_USERNAME not defined. Define it this way: export SWITCH_USERNAME=admin ''')
+    sys.exit(
+        ''' ERROR: Environment variable SWITCH_USERNAME not defined. Define it this way: export SWITCH_USERNAME=admin ''')
 try:
     switch_password = os.getenv('SWITCH_PASSWORD')
 except:
-    print(
-        ''' Environment variable SWITCH_PASSWORD not defined. Define it this way: export SWITCH_PASSWORD=abc1234 ''')
+    sys.exit(
+        ''' ERROR: Environment variable SWITCH_PASSWORD not defined. Define it this way: export SWITCH_PASSWORD=abc1234 ''')
 
 # Load switch list into dictionary variable to loop over
 if switch_list and switch_username and switch_password != '':
@@ -239,3 +239,4 @@ else:
     print('''SWITCH_USERNAME. Define it this way: export SWITCH_USERNAME='admin' ''')
     print('''SWITCH_PASSWORD. Define it this way: export SWITCH_PASSWORD='abc1234' ''')
     print('''SWITCHES.        Define it this way: export SWITCHES='["1.2.3.4", "1.2.3.5"] ''')
+    sys.exit('Exiting Script')
