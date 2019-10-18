@@ -61,7 +61,7 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
             else:
                 stepped_upgrade = False
             # Print the Version
-            print('{}: Switch version is {}'.format(unicode(switch, switch_version)))
+            print('{}: Switch version is {}'.format(switch, switch_version))
         else:
             sys.exit('{}: No version information found from regular expression! Is the regex correct?'.format(switch))
 
@@ -84,18 +84,19 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
                 print(bootrom_output)
                 print('{}: Bootrom not loading. See above command output'.format(switch))
                 continue
-            time.sleep(25)
+            time.sleep(45)
             # Download 8090C Imnage
             print('{}: Downloading 8090c image'.format(switch))
             image_download_command = 'copy tftp flash {} {}08090c/ICX{}/Images/SP{}08090c.bin primary'.format(tftp_server, tftp_directory, chassis_type, switch_type)
             image_output = net_connect.send_command(image_download_command)
+            time.sleep(5)
             if 'Load to buffer' in image_output:
                 print('{}: Image transfer started'.format(switch))
             else:
                 print(image_output)
                 print('{}: Image not loading. See above command output.'.format(switch))
                 continue
-            time.sleep(25)
+            time.sleep(45)
             upgrade_finished = False
             upgrade_timer = 0
             while upgrade_finished == False:
@@ -126,7 +127,6 @@ def upgrade_switch(switch, switch_username, switch_password, target_version):
             except:
                 print('{}: Connection to device lost, attempting to reconnect.'.format(switch))
                 disconnected = True
-                disconnected_time = 30
             while disconnected == True:
                 print('{}: Attempting to reconnect to device'.format(switch))
                 time.sleep(30)
